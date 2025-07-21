@@ -1,5 +1,10 @@
 function CharAbilitiesMonitorWarn()
-    local char_abilities_update = gmcp.Char.Abilities.Update
+    local char_abilities_update = GMCPSafe.getTable("Char.Abilities.Update", {})
+    
+    -- Skip if no abilities data
+    if not char_abilities_update or not char_abilities_update.name then
+        return
+    end
   
     --for index = 19, 2, -1 do
     --index = 19;

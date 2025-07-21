@@ -1,3 +1,4 @@
+-- Enhanced responsive background layout
 GUI.Right = Geyser.Label:new({
   name = "GUI.Right",
   x = "-40%", y = 0,
@@ -21,3 +22,8 @@ GUI.Bottom = Geyser.Label:new({
   height = "10%",
 })
 setBackgroundColor("GUI.Bottom", 0, 0, 0)
+
+-- Add resize handlers for background elements
+if GUI.WindowResize then
+    GUI.WindowResize.backgroundElements = {GUI.Right, GUI.Top, GUI.Bottom}
+end

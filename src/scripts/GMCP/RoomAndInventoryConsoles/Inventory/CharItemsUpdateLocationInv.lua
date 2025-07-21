@@ -1,7 +1,11 @@
 function CharItemsUpdateLocationInv()
-  if gmcp.Char.Items.Update.location == "inv" then
-    local value = gmcp.Char.Items.Update.item
-		local itemKey = gmcp.Char.Items.Update.item.id
+  if GMCPSafe.getString("Char.Items.Update.location", "") == "inv" then
+    local value = GMCPSafe.getTable("Char.Items.Update.item", {})
+    if not value or not value.id or not value.name then
+      return -- Skip if item data is incomplete
+    end
+    
+		local itemKey = value.id
     local highlight = getItemHighlight(value) or ""
     if value.attrib == "w" then
       wornArmour[value.id] = highlight .. value.name

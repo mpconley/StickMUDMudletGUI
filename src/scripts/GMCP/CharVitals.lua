@@ -3,9 +3,19 @@ function round(n)
 end
 
 function CharVitals()
-	local current_hp, max_hp = tonumber(gmcp.Char.Vitals.hp), tonumber(gmcp.Char.Vitals.maxhp)
-	local current_sp, max_sp = tonumber(gmcp.Char.Vitals.sp), tonumber(gmcp.Char.Vitals.maxsp)
-	local current_fp, max_fp = tonumber(gmcp.Char.Vitals.fp), tonumber(gmcp.Char.Vitals.maxfp)
+	-- Use safe GMCP access with defaults
+	local current_hp = GMCPSafe.getNumber("Char.Vitals.hp", 0)
+	local max_hp = GMCPSafe.getNumber("Char.Vitals.maxhp", 1)
+	local current_sp = GMCPSafe.getNumber("Char.Vitals.sp", 0)
+	local max_sp = GMCPSafe.getNumber("Char.Vitals.maxsp", 1)
+	local current_fp = GMCPSafe.getNumber("Char.Vitals.fp", 0)
+	local max_fp = GMCPSafe.getNumber("Char.Vitals.maxfp", 1)
+	
+	-- Ensure max values are never zero to prevent division by zero
+	if max_hp <= 0 then max_hp = 1 end
+	if max_sp <= 0 then max_sp = 1 end
+	if max_fp <= 0 then max_fp = 1 end
+	
 	local percent_hp = round(tonumber(current_hp / max_hp * 100))
 	local percent_sp = round(tonumber(current_sp / max_sp * 100))
 	local percent_fp = round(tonumber(current_fp / max_fp * 100))

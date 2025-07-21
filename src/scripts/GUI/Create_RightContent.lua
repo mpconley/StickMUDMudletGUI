@@ -14,9 +14,9 @@ local content_items = {
 local function sendGMCPForSection(section)
     local itemSections = { BoxWieldedWeapons = true, BoxWornArmour = true, BoxInventory = true }
     if itemSections[section] then
-        sendGMCP("Char.Items.Inv")
+        if sendGMCP then sendGMCP("Char.Items.Inv") end
     elseif section == "BoxRoomInv" then
-        sendGMCP("Char.Items.Room")
+        if sendGMCP then sendGMCP("Char.Items.Room") end
     end
 end
 
@@ -78,18 +78,18 @@ GUI.ContentBox = Geyser.Label:new({
 }, GUI.Right)
 GUI.ContentBox:setStyleSheet(GUI.BoxRightCSS:getCSS())
 
--- Function to initialize consoles
+-- Function to initialize consoles with responsive positioning
 local function initializeConsole(item)
     local console_type = item.console:find("Console") and "MiniConsole" or item.console:find("Container") and "Container" or "ScrollBox"
     local console_settings = {
         name = "GUI." .. item.console,
-        x = GUI.ContentBox:get_x(),
-        y = GUI.ContentBox:get_y(),
-        height = GUI.ContentBox:get_height(),
-        width = GUI.ContentBox:get_width()
+        x = 0,  -- Use relative positioning
+        y = 0,  -- Use relative positioning
+        height = "100%",  -- Fill parent container
+        width = "100%"    -- Fill parent container
     }
 
-    GUI[item.console] = Geyser[console_type]:new(console_settings)
+    GUI[item.console] = Geyser[console_type]:new(console_settings, GUI.ContentBox)
     setBackgroundColor("GUI." .. item.console, 0, 0, 0, 255)
 
     if console_type == "MiniConsole" then

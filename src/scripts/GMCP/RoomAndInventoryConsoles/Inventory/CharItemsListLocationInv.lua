@@ -1,10 +1,11 @@
 function CharItemsListLocationInv()
-  if gmcp.Char.Items.List.location == "inv" then
+  if GMCPSafe.getString("Char.Items.List.location", "") == "inv" then
     wornArmour = {}
     wieldedWeapons = {}
 		otherInventory = {}
-    if (gmcp.Char.Items.List.items ~= "") then
-      for key, value in pairs(gmcp.Char.Items.List.items) do
+    local items = GMCPSafe.getTable("Char.Items.List.items", {})
+    if (items and next(items) ~= nil) then
+      for key, value in pairs(items) do
         local highlight = getItemHighlight(value) or ""
         if value.attrib == "w" then
           wornArmour[value.id] = highlight .. value.name

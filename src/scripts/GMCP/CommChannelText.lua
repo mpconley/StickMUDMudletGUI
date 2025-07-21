@@ -1,7 +1,12 @@
 function CommChannelText()
-    local channel = gmcp.Comm.Channel.Text.channel
-    local text = gmcp.Comm.Channel.Text.text
+    local channel = GMCPSafe.getString("Comm.Channel.Text.channel", "")
+    local text = GMCPSafe.getString("Comm.Channel.Text.text", "")
     local timeStamp = os.date("%I:%M ")
+    
+    -- Don't process if no text was received
+    if text == "" then
+        return
+    end
 
     -- Fallback function to get preferences safely
     local function getPreference(consoleName, key, defaultValue)

@@ -1,8 +1,8 @@
 function CharStatus()
-    local gold = gmcp.Char.Status.gold or "?"
-    local bank = gmcp.Char.Status.bank or "?"
-    local enemy = gmcp.Char.Status.enemy or "None"
-    local current_enemy_health = gmcp.Char.Status.enemy_health
+    local gold = GMCPSafe.getString("Char.Status.gold", "?")
+    local bank = GMCPSafe.getString("Char.Status.bank", "?")
+    local enemy = GMCPSafe.getString("Char.Status.enemy", "None")
+    local current_enemy_health = GMCPSafe.getString("Char.Status.enemy_health", "None")
     local percent_enemy_health
 
     GUI.BoxGold:echo(
@@ -46,7 +46,7 @@ function CharStatus()
     local state
 
     for i = 1, 12 do
-        state = gmcp.Char.Status[char_status[i]]
+        state = GMCPSafe.getString("Char.Status." .. char_status[i], "No")
 
         GUI["Box" .. char_status[i] .. "CSS"] = CSSMan.new(
                                                     GUI.BoxRightCSS:getCSS())
@@ -108,7 +108,7 @@ function CharStatus()
     local item
 
     for i = 1, 15 do
-        item = gmcp.Char.Status[icons[i]]
+        item = GMCPSafe.getString("Char.Status." .. icons[i], "No")
         local icon_value = header_icons[i]
 
         GUI["Box" .. icons[i] .. "CSS"] = CSSMan.new(GUI.BoxHeaderCSS:getCSS())

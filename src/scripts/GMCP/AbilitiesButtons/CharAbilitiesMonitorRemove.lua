@@ -1,5 +1,10 @@
 function CharAbilitiesMonitorRemove()
-    local char_abilities_remove = gmcp.Char.Abilities.Remove
+    local char_abilities_remove = GMCPSafe.getTable("Char.Abilities.Remove", {})
+    
+    -- Skip if no abilities data
+    if not char_abilities_remove or not char_abilities_remove.name then
+        return
+    end
   
     --for index = 19, 2, -1 do
     --index = 19;

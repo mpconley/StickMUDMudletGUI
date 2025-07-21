@@ -133,3 +133,49 @@ function createControlLabel(console_value, labelType, xPos, icon)
         border: 0px solid #000000;
     ]])
 end
+
+-- Global error handler for GMCP functions to prevent crashes during startup
+function safeCallGMCPFunction(funcName, func, ...)
+    if not func or type(func) ~= "function" then
+        return false, "Function not available"
+    end
+    
+    local success, result = pcall(func, ...)
+    if not success then
+        print("Error in " .. (funcName or "unknown GMCP function") .. ": " .. tostring(result))
+        return false, result
+    end
+    
+    return true, result
+end
+
+-- Enhanced sendGMCP with safety checks
+local original_sendGMCP = sendGMCP
+if original_sendGMCP then
+    sendGMCP = function(message)
+        if not message or type(message) ~= "string" then
+            return false
+        end
+        
+        local success, result = pcall(original_sendGMCP, message)
+        if not success then
+            print("Error sending GMCP message '" .. message .. "': " .. tostring(result))
+            return false
+        end
+        
+        return true
+    end
+end
+
+-- Global command to refresh GUI layout
+function refreshGUI()
+    if GUI.WindowResize and GUI.WindowResize.onWindowResize then
+        GUI.WindowResize.onWindowResize()
+        print("GUI layout refreshed manually.")
+    else
+        print("Window resize system not available.")
+    end
+end
+
+-- Alias for easier access
+refreshLayout = refreshGUI

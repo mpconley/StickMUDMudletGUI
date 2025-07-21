@@ -1,7 +1,7 @@
 function RoomInfo()
-    local name = gmcp.Room.Info.name or "Room"
-    local area = gmcp.Room.Info.area or "Area"
-    local exits = gmcp.Room.Info.exits or {}
+    local name = GMCPSafe.getString("Room.Info.name", "Room")
+    local area = GMCPSafe.getString("Room.Info.area", "Area")
+    local exits = GMCPSafe.getTable("Room.Info.exits", {})
 
     GUI.BoxRoom:echo(
         string.format("<center><font size=\"4\">📍</font> <b><font size=\"3\">%s</font></b></center>", name)

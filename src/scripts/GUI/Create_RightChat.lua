@@ -76,17 +76,17 @@ local function toggleTimestamp(consoleName, value)
     end
 end
 
--- Helper function to initialize a chat console
+-- Helper function to initialize a chat console with responsive positioning
 local function initializeConsole(item)
     if not item.console then return end
 
     GUI[item.console] = Geyser.MiniConsole:new({
         name = "GUI." .. item.console,
-        x = GUI.ChatBox:get_x(),
-        y = GUI.ChatBox:get_y(),
-        height = GUI.ChatBox:get_height(),
-        width = GUI.ChatBox:get_width()
-    })
+        x = 0,      -- Use relative positioning
+        y = 0,      -- Use relative positioning
+        height = "100%",  -- Fill parent container
+        width = "100%"    -- Fill parent container
+    }, GUI.ChatBox)
     
     local consoleName = "GUI." .. item.console
     setBackgroundColor(consoleName, 0, 0, 0, 0)

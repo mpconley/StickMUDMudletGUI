@@ -6,7 +6,7 @@ function on_helplabel_press(category)
 end
 
 function CharHelpList()
-    local help_list = gmcp.Char.Help.List
+    local help_list = GMCPSafe.getTable("Char.Help.List", {})
     local num_topics = 0
     local console_height = 0
     local current_y = 0
@@ -15,6 +15,12 @@ function CharHelpList()
     local count = 0
 
     clearWindow("GUI.HelpConsole")
+    
+    -- Check if help list is empty
+    if not help_list or next(help_list) == nil then
+        cecho("GUI.HelpConsole", "<yellow>No help topics available yet. Please wait for data to load.<reset>\n")
+        return
+    end
 
     -- populate the table that holds the keys
     for k in pairs(help_list) do

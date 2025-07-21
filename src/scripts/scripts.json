@@ -7,6 +7,18 @@
        },
        {
               "isActive": "yes",
+              "isFolder": "no",
+              "name": "GMCPSafeAccess",
+              "script": ""
+       },
+       {
+              "isActive": "yes",
+              "isFolder": "no",
+              "name": "WindowResize",
+              "script": ""
+       },
+       {
+              "isActive": "yes",
               "isFolder": "yes",
               "name": "CSSman",
               "script": ""

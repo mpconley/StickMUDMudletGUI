@@ -1,5 +1,8 @@
 abilitiesTimers = {}
 
+-- Initialize GMCP safety defaults
+GMCPSafe.initializeDefaults()
+
 tempTimer(
   1.0,
   function()
@@ -12,6 +15,9 @@ tempTimer(
   end
 )
 
-sendGMCP("Char.Vitals")
-sendGMCP("Char.Status")
-sendGMCP("Game.Players.List")
+-- Send initial GMCP requests with safety checks
+if sendGMCP then
+  sendGMCP("Char.Vitals")
+  sendGMCP("Char.Status")
+  sendGMCP("Game.Players.List")
+end
