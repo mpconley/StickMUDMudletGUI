@@ -1,6 +1,9 @@
 -- Handle Game.Players.Info GMCP response
 -- Updates the player detail popup with additional information
 
+-- Popup dimensions (must match GamePlayersList.lua)
+local POPUP_WIDTH = 300
+
 function GamePlayersInfo()
     local info = gmcp.Game and gmcp.Game.Players and gmcp.Game.Players.Info or {}
     
@@ -252,11 +255,10 @@ function GamePlayersInfo()
         local statusLabelName = "GUI.PlayerDetailPopupAFKStatus"
         
         -- Calculate position (bottom-right corner of avatar)
-        local popupWidth = GUI.PlayerDetailPopup:get_width()
         local avatarHalfWidth = 32  -- 64px / 2
         local avatarSize = 64
         local statusSize = 16  -- Smaller size for less intrusion
-        local statusX = (popupWidth / 2) + avatarHalfWidth - statusSize - 2  -- Inside avatar right edge
+        local statusX = (POPUP_WIDTH / 2) + avatarHalfWidth - statusSize - 2  -- Inside avatar right edge
         local statusY = padding + avatarSize - statusSize - 2  -- Inside avatar bottom edge
         
         -- Always recreate the label to ensure it displays properly
@@ -308,10 +310,9 @@ function GamePlayersInfo()
         local opkLabelName = "GUI.PlayerDetailPopupOPK"
         
         -- Calculate position (right of avatar, halfway to border)
-        local popupWidth = GUI.PlayerDetailPopup:get_width()
-        local avatarRightEdge = (popupWidth / 2) + 32  -- Center + half avatar width
+        local avatarRightEdge = (POPUP_WIDTH / 2) + 32  -- Center + half avatar width
         local rightMargin = 10  -- Border padding
-        local availableSpace = popupWidth - avatarRightEdge - rightMargin
+        local availableSpace = POPUP_WIDTH - avatarRightEdge - rightMargin
         local opkWidth = 32
         local opkHeight = 18
         local opkX = avatarRightEdge + (availableSpace / 2) - (opkWidth / 2)  -- Centered in available space
