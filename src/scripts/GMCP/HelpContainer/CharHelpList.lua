@@ -104,10 +104,21 @@ function CharHelpList()
     local category_height = 3.5
     local scrollbox_height = 100 - (num_categories * category_height)
     local current_y = 0
+    local cols = 3
 
     -- Set default selected topic if none
     if selected_help_topic == nil or not help_list[selected_help_topic] then
         selected_help_topic = tkeys[1]
+    end
+
+    -- Calculate max rows needed across all categories for consistent height
+    local max_rows = 0
+    for _, category in ipairs(tkeys) do
+        local num_topics = #help_list[category]
+        local rows_needed = math.ceil(num_topics / cols)
+        if rows_needed > max_rows then
+            max_rows = rows_needed
+        end
     end
 
     -- Create category labels and scrollbox
@@ -163,11 +174,10 @@ function CharHelpList()
             -- We'll use 3 columns by default, but could adapt based on layout
             local topics = help_list[category]
             local num_topics = #topics
-            local cols = 3
-            local rows_needed = math.ceil(num_topics / cols)
 
             local topic_index = 1
-            for row_num = 1, rows_needed do
+            -- Use max_rows to ensure consistent height across all categories
+            for row_num = 1, max_rows do
                 -- Create HBox for this row
                 local rowName = "HelpTopicRow_" .. row_num
                 GUI.HelpTopicRows[row_num] = Geyser.HBox:new({
