@@ -199,7 +199,7 @@ function CharHelpList()
                         GUI.HelpTopicLabels[labelKey]:setStyleSheet(helpTopicCSS)
                         GUI.HelpTopicLabels[labelKey]:echo(
                             string.format(
-                                [[<a href="send:help %s"><span style="font-size:14px;color:cyan;">%s</span></a>]],
+                                [[<a href="send:help %s" style="text-decoration:none;"><span style="font-size:14px;color:cyan;">%s</span></a>]],
                                 topic, topic
                             )
                         )
