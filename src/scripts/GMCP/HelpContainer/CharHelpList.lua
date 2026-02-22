@@ -5,8 +5,8 @@ local categoryButtonCSS = [[
     QLabel {
         background-color: #2a2a35;
         border: 1px solid #4a4a55;
-        border-radius: 4px;
-        padding: 2px;
+        border-radius: 3px;
+        padding: 1px;
     }
     QLabel::hover {
         background-color: #3a3a45;
@@ -17,9 +17,9 @@ local categoryButtonCSS = [[
 local categoryButtonSelectedCSS = [[
     QLabel {
         background-color: #3a3a55;
-        border: 2px solid #7a7aff;
-        border-radius: 4px;
-        padding: 2px;
+        border: 1px solid #7a7aff;
+        border-radius: 3px;
+        padding: 1px;
     }
 ]]
 
@@ -33,6 +33,9 @@ local helpTopicCSS = [[
         background-color: rgba(100,100,150,50);
     }
 ]]
+
+-- Row height: 14px font plus 2px padding top + 2px padding bottom = 18px
+local HELP_ROW_HEIGHT = 18
 
 -- Storage for dynamically created elements
 GUI.HelpCategoryLabels = GUI.HelpCategoryLabels or {}
@@ -96,9 +99,9 @@ function CharHelpList()
     end
     table.sort(tkeys)
 
-    -- Calculate layout - categories take 5% height each
+    -- Calculate layout - categories take 3.5% height each
     local num_categories = #tkeys
-    local category_height = 5
+    local category_height = 3.5
     local scrollbox_height = 100 - (num_categories * category_height)
     local current_y = 0
 
@@ -130,7 +133,7 @@ function CharHelpList()
         end
 
         GUI.HelpCategoryLabels[category]:echo(
-            "<center><font size=\"3\" color=\"yellow\">" .. firstToUpper(category) .. "</font></center>"
+            "<center><span style='font-size:12px;color:yellow;'>" .. firstToUpper(category) .. "</span></center>"
         )
         GUI.HelpCategoryLabels[category]:setClickCallback("on_helplabel_press", category)
 
@@ -162,7 +165,6 @@ function CharHelpList()
             local num_topics = #topics
             local cols = 3
             local rows_needed = math.ceil(num_topics / cols)
-            local row_height = 22  -- Fixed height per row
 
             local topic_index = 1
             for row_num = 1, rows_needed do
@@ -171,7 +173,7 @@ function CharHelpList()
                 GUI.HelpTopicRows[row_num] = Geyser.HBox:new({
                     name = "GUI." .. rowName,
                     h_policy = Geyser.Fixed,
-                    height = row_height
+                    height = HELP_ROW_HEIGHT
                 }, GUI.HelpTopicsVBox)
 
                 -- Add topic labels to this row
@@ -187,7 +189,7 @@ function CharHelpList()
                         GUI.HelpTopicLabels[labelKey]:setStyleSheet(helpTopicCSS)
                         GUI.HelpTopicLabels[labelKey]:echo(
                             string.format(
-                                [[<font size="2" color="cyan">%s</font> <a href="send:help %s"><font size="2" color="magenta">?</font></a>]],
+                                [[<a href="send:help %s"><span style="font-size:14px;color:cyan;">%s</span></a>]],
                                 topic, topic
                             )
                         )
