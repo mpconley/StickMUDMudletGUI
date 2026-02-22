@@ -5,11 +5,13 @@ local function getInitialLayout()
     local middlePercent = math.floor(layout.middleWidth * 100)
     local rightPercent = math.floor(layout.rightPanelWidth * 100)
     local mainPercent = 100 - middlePercent - rightPercent
+    local headerFooterPercent = mainPercent + middlePercent  -- Header/footer cover main + middle
     return {
         totalRight = totalRight,
         middlePercent = middlePercent,
         rightPercent = rightPercent,
-        mainPercent = mainPercent
+        mainPercent = mainPercent,
+        headerFooterPercent = headerFooterPercent
     }
 end
 
@@ -36,7 +38,7 @@ setBackgroundColor("GUI.Right", 0, 0, 0)
 GUI.Top = Geyser.Label:new({
   name = "GUI.Top",
   x = 0, y = 0,
-  width = initLayout.mainPercent .. "%",
+  width = initLayout.headerFooterPercent .. "%",
   height = "7%",
 })
 setBackgroundColor("GUI.Top", 0, 0, 0)
@@ -44,7 +46,7 @@ setBackgroundColor("GUI.Top", 0, 0, 0)
 GUI.Bottom = Geyser.Label:new({
   name = "GUI.Bottom",
   x = 0, y = "90%",
-  width = initLayout.mainPercent .. "%",
+  width = initLayout.headerFooterPercent .. "%",
   height = "10%",
 })
 setBackgroundColor("GUI.Bottom", 0, 0, 0)
@@ -55,6 +57,7 @@ function updateLayoutPanels()
     local middlePercent = math.floor(layout.middleWidth * 100)
     local rightPercent = math.floor(layout.rightPanelWidth * 100)
     local mainPercent = 100 - middlePercent - rightPercent
+    local headerFooterPercent = mainPercent + middlePercent
     
     -- Update Middle panel
     GUI.Middle:move("-" .. (middlePercent + rightPercent) .. "%", "7%")
@@ -65,8 +68,8 @@ function updateLayoutPanels()
     GUI.Right:resize(rightPercent .. "%", "100%")
     
     -- Update Top panel
-    GUI.Top:resize(mainPercent .. "%", "7%")
+    GUI.Top:resize(headerFooterPercent .. "%", "7%")
     
     -- Update Bottom panel
-    GUI.Bottom:resize(mainPercent .. "%", "10%")
+    GUI.Bottom:resize(headerFooterPercent .. "%", "10%")
 end

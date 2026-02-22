@@ -2,11 +2,12 @@ GUI = GUI or {}
 GUI.IconBackgrounds = GUI.IconBackgrounds or {}
 
 -- Layout presets for different screen sizes
--- Each preset defines: rightPanelWidth (percentage of screen for right panels)
+-- Each preset defines: rightPanelWidth + middleWidth = total right side
+-- Smaller values = larger main window
 GUI.LayoutPresets = {
-    ["Compact"] = { rightPanelWidth = 0.40, middleWidth = 0.08, description = "More main window space" },
-    ["Normal"]  = { rightPanelWidth = 0.48, middleWidth = 0.10, description = "Balanced layout" },
-    ["Wide"]    = { rightPanelWidth = 0.52, middleWidth = 0.10, description = "Original layout" }
+    ["Compact"] = { rightPanelWidth = 0.30, middleWidth = 0.08, description = "Maximum main window (62%)" },
+    ["Normal"]  = { rightPanelWidth = 0.36, middleWidth = 0.10, description = "More main window (54%)" },
+    ["Wide"]    = { rightPanelWidth = 0.42, middleWidth = 0.10, description = "Original layout (48%)" }
 }
 
 -- Path to layout settings file
