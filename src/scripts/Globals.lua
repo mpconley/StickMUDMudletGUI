@@ -76,8 +76,7 @@ default_content_preferences = {
     ["GUI.TrainingScrollBox"] = {fontSize = getDefaultScrollBoxFontSize()},
     ["GUI.SessionScrollBox"] = {fontSize = getDefaultScrollBoxFontSize()},
     ["GUI.EventsScrollBox"] = {fontSize = getDefaultScrollBoxFontSize()},
-    ["GUI.GroupScrollBox"] = {fontSize = getDefaultConsoleFontSize()},
-    ["GUI.HelpConsole"] = {fontSize = getDefaultConsoleFontSize()}
+    ["GUI.GroupScrollBox"] = {fontSize = getDefaultConsoleFontSize()}
 }
 
 -- Path to content preferences file
