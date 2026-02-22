@@ -10,7 +10,6 @@ local function getInitialLayout()
         totalRight = totalRight,
         middlePercent = middlePercent,
         rightPercent = rightPercent,
-        mainPercent = mainPercent,
         headerFooterPercent = headerFooterPercent
     }
 end
