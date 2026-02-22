@@ -28,7 +28,6 @@ local helpTopicCSS = [[
     QLabel {
         background-color: transparent;
         padding: 2px 4px;
-        qproperty-alignment: 'AlignLeft | AlignTop';
     }
     QLabel::hover {
         background-color: rgba(100,100,150,50);
@@ -202,10 +201,7 @@ function CharHelpList()
                         GUI.HelpTopicLabels[labelKey] = Geyser.Label:new({
                             name = "GUI.HelpTopicLabel_" .. labelKey
                         }, GUI.HelpTopicRows[row_num])
-                        GUI.HelpTopicLabels[labelKey]:setStyleSheet([[
-                            background-color: transparent;
-                            qproperty-alignment: 'AlignLeft | AlignTop';
-                        ]])
+                        GUI.HelpTopicLabels[labelKey]:setStyleSheet([[background-color: transparent;]])
                     end
                 end
             end
