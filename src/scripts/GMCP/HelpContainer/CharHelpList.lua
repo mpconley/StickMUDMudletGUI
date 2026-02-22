@@ -187,6 +187,7 @@ function CharHelpList()
                         }, GUI.HelpTopicRows[row_num])
 
                         GUI.HelpTopicLabels[labelKey]:setStyleSheet(helpTopicCSS)
+                        GUI.HelpTopicLabels[labelKey]:setAlignment("topleft")
                         GUI.HelpTopicLabels[labelKey]:echo(
                             string.format(
                                 [[<a href="send:help %s"><span style="font-size:14px;color:cyan;">%s</span></a>]],
@@ -202,6 +203,7 @@ function CharHelpList()
                             name = "GUI.HelpTopicLabel_" .. labelKey
                         }, GUI.HelpTopicRows[row_num])
                         GUI.HelpTopicLabels[labelKey]:setStyleSheet([[background-color: transparent;]])
+                        GUI.HelpTopicLabels[labelKey]:setAlignment("topleft")
                     end
                 end
             end
